@@ -4,8 +4,8 @@ export default function TodoItem(props) {
     return (
         <li>
             <div class="todo-name">
-                <h2>3/13/2023</h2>
-                <h2>Sleep</h2>
+                <h2>{props.date}</h2>
+                <h2>{props.name}</h2>
             </div>
             <input type ="checkbox"></input>
             <div class="btn-group">
