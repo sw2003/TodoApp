@@ -3,17 +3,69 @@ import React, { useState } from 'react';
 import Form from './components/form';
 import TodoItem from './components/todo-item';
 import FilterButton from './components/filter-button';
+import { nanoid } from 'nanoid';
+
 function App(props) {
   const [tasks, setTasks] = useState(props.Tasks) 
+
+  function handleSubmit(name, date, desc){
+    const id = nanoid(); 
+
+    const updatedTasks = [...tasks, {
+      Key: id,
+      Id: id,
+      Name: name,
+      Date: date,
+      Desc: desc, 
+      Completed: false
+    }]
+
+    setTasks(updatedTasks); 
+  }
+
+  function handleCompletion(id){
+    const updatedTasks = tasks.map((task)=>{
+      console.log(`${task.Id}  ${id}`);
+
+      if (task.Id === id){
+        return {...task, Completed: !task.Completed}
+      }
+
+      return task;
+    })
+
+    setTasks(updatedTasks); 
+    console.log(updatedTasks); 
+  }
+
+  function handleEdit(type, value, id){
+      const updatedTasks = tasks.map((task)=>{
+        if (task.Id === id){
+          return {...task, [type]: value}
+        }
+        return task; 
+      })
+      setTasks(updatedTasks); 
+  }
   
+
   const taskList = tasks.map((task)=>{
-    return (<TodoItem key={task.Key} name={task.Name} date={task.Date} desc={task.Desc} completed={task.Completed} />)
+    return (<TodoItem 
+      id={task.Id} 
+      key={task.Key} 
+      name={task.Name} 
+      date={task.Date} 
+      desc={task.Desc} 
+      completed={task.Completed} 
+      handleCompletion={handleCompletion} 
+      handleEdit={handleEdit}
+    />)
   })
 
   return (
     <div className="App">
       <h1>TodoApp</h1>
-      <Form></Form>
+      <Form handleSubmit={handleSubmit}></Form>
       <div className="form-btn-group">
         <FilterButton></FilterButton>
         <FilterButton></FilterButton>
