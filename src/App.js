@@ -47,6 +47,17 @@ function App(props) {
       })
       setTasks(updatedTasks); 
   }
+
+  function handleDelete(id){
+    const updatedTasks = tasks.filter((task)=>{
+      if (task.Id === id){
+        return false; 
+      }
+
+      return true; 
+    })
+    setTasks(updatedTasks); 
+  }
   
 
   const taskList = tasks.map((task)=>{
@@ -59,6 +70,7 @@ function App(props) {
       completed={task.Completed} 
       handleCompletion={handleCompletion} 
       handleEdit={handleEdit}
+      handleDelete={handleDelete}
     />)
   })
 
