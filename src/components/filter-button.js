@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function FilterButton(props){
     return (
-        <button>All</button>
+        <button onClick={()=>props.setFilter(props.name)}>{props.name}</button>
     )
 }

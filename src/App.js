@@ -5,8 +5,17 @@ import TodoItem from './components/todo-item';
 import FilterButton from './components/filter-button';
 import { nanoid } from 'nanoid';
 
+const FILTER_OPTIONS = {
+  "All": ()=>true,
+  "Active": (task)=>!task.Completed,
+  "Completed": (task)=>task.Completed
+}
+
+const FILTER_NAMES = Object.keys(FILTER_OPTIONS); 
+
 function App(props) {
   const [tasks, setTasks] = useState(props.Tasks) 
+  const [filter, setFilter] = useState("All"); 
 
   function handleSubmit(name, date, desc){
     const id = nanoid(); 
@@ -25,8 +34,6 @@ function App(props) {
 
   function handleCompletion(id){
     const updatedTasks = tasks.map((task)=>{
-      console.log(`${task.Id}  ${id}`);
-
       if (task.Id === id){
         return {...task, Completed: !task.Completed}
       }
@@ -58,9 +65,10 @@ function App(props) {
     })
     setTasks(updatedTasks); 
   }
-  
 
-  const taskList = tasks.map((task)=>{
+  console.log(filter);
+  
+  const taskList = tasks.filter(FILTER_OPTIONS[filter]).map((task)=>{
     return (<TodoItem 
       id={task.Id} 
       key={task.Key} 
@@ -74,14 +82,20 @@ function App(props) {
     />)
   })
 
+  const filterList = FILTER_NAMES.map((option)=>{
+    return <FilterButton 
+    key={option}
+    name={option}
+    setFilter={setFilter}
+    />
+  })
+
   return (
     <div className="App">
       <h1>TodoApp</h1>
       <Form handleSubmit={handleSubmit}></Form>
       <div className="form-btn-group">
-        <FilterButton></FilterButton>
-        <FilterButton></FilterButton>
-        <FilterButton></FilterButton>     
+        {filterList}  
       </div>
       <ul>
           {taskList}
