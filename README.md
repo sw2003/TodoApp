@@ -1,3 +1,11 @@
+# About
+Built TodoList expanded on
+https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning
+
+Check it out here 
+
+
+
 # Getting Started with TodoApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
