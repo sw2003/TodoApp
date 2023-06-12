@@ -65,8 +65,6 @@ function App(props) {
     })
     setTasks(updatedTasks); 
   }
-
-  console.log(filter);
   
   const taskList = tasks.filter(FILTER_OPTIONS[filter]).map((task)=>{
     return (<TodoItem 

@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function FilterButton(props){
     return (
-        <button onClick={()=>props.setFilter(props.name)}>{props.name}</button>
+        <button aria-pressed="false" onClick={()=>props.setFilter(props.name)}>{props.name}</button>
     )
 }

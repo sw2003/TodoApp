@@ -33,7 +33,7 @@ export default function TodoItem(props) {
             <input type="checkbox" defaultChecked={props.completed} onChange={() => props.handleCompletion(props.id)}></input>
             <div className="btn-group">
                 <button onClick={() => setEditing(true)}>Edit</button>
-                <button onClick={() => handleDelete(props.id)}>Delete</button>
+                <button className="delete-btn" onClick={() => handleDelete(props.id)}>Delete</button>
             </div>
             <p>{props.desc}</p>
         </li>
